@@ -335,3 +335,15 @@
   }
 
 })();
+
+document.addEventListener("DOMContentLoaded", function() {
+  var alertElement = document.querySelector('.alert');
+  if (alertElement) {
+      setTimeout(function() {
+          alertElement.classList.add('fade-out');
+          setTimeout(function() {
+              location.reload();  // Actualiser la page après le fondu
+          }, 200);  // Délai de 500 millisecondes correspondant à la durée de transition CSS
+      }, 1000);
+  }
+});
