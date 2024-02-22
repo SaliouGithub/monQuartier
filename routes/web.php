@@ -2,6 +2,9 @@
 
 use App\Http\Controllers\CommuneController;
 use App\Http\Controllers\QuartierController;
+use App\Http\Controllers\MaisonController;
+use App\Http\Controllers\HabitantController;
+use App\Http\Controllers\DelegueQuartierController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -35,17 +38,7 @@ Route::resource("/utilisateur", UserController::class, [
     ],
 ]);
 
-// Route::resource("/commune", CommuneController::class, [
-//     'names' => [
-//         'index' => 'pages.commune.index',
-//         'create' => 'pages.commune.create',
-//         'store' => 'pages.commune.store',
-//         'show' => 'pages.commune.show',
-//         'edit' => 'pages.commune.edit',
-//         'update' => 'pages.commune.update',
-//         // 'destroy' => 'pages.commune.destroy',
-//     ],
-// ]);
+
 
 Route::get('/commune', [CommuneController::class, 'index'])->name('pages.commune.index');
 Route::get('/commune/create', [CommuneController::class, 'create'])->name('pages.commune.create');
@@ -57,18 +50,6 @@ Route::delete('/commune/{id}', [CommuneController::class, 'destroy'])->name('pag
 
 
 
-// Route::resource("/quartier", QuartierController::class, [
-//     'names' => [
-//         'index' => 'pages.quartier.index',
-//         'create' => 'pages.quartier.create',
-//         'store' => 'pages.quartier.store',
-//         'show' => 'pages.quartier.show',
-//         'edit' => 'pages.quartier.edit',
-//         'update' => 'pages.quartier.update',
-//         'destroy' => 'pages.quartier.destroy',
-//     ],
-// ]);
-
 Route::get('/quartier', [QuartierController::class, 'index'])->name('pages.quartier.index');
 Route::get('/quartier/create', [QuartierController::class, 'create'])->name('pages.quartier.create');
 Route::post('/quartier', [QuartierController::class, 'store'])->name('pages.quartier.store');
@@ -78,14 +59,42 @@ Route::put('/quartier/{id}', [QuartierController::class, 'update'])->name('pages
 Route::delete('/quartier/{id}', [QuartierController::class, 'destroy'])->name('pages.quartier.destroy');
 
 
- 
-// Route::get('/utilisateur', [UserController::class, 'index'])->name('pages.user.index');
-// Route::get('/commune', [CommuneController::class, 'index'])->name('pages.commune.index');
-// Route::get('/quartier', [QuartierController::class, 'index'])->name('pages.quartier.index');
+
+Route::get('/maison', [MaisonController::class, 'index'])->name('pages.maison.index');
+Route::get('/maison/create', [MaisonController::class, 'create'])->name('pages.maison.create');
+Route::post('/maison', [MaisonController::class, 'store'])->name('pages.maison.store');
+Route::get('/maison/{id}', [MaisonController::class, 'show'])->name('pages.maison.show');
+Route::get('/maison/{id}/edit', [MaisonController::class, 'edit'])->name('pages.maison.edit');
+Route::put('/maison/{id}', [MaisonController::class, 'update'])->name('pages.maison.update');
+Route::delete('/maison/{id}', [MaisonController::class, 'destroy'])->name('pages.maison.destroy');
+
+
+
+Route::get('/habitant', [HabitantController::class, 'index'])->name('pages.habitant.index');
+Route::get('/habitant/create', [HabitantController::class, 'create'])->name('pages.habitant.create');
+Route::post('/habitant', [HabitantController::class, 'store'])->name('pages.habitant.store');
+Route::get('/habitant/{id}', [HabitantController::class, 'show'])->name('pages.habitant.show');
+Route::get('/habitant/{id}/edit', [HabitantController::class, 'edit'])->name('pages.habitant.edit');
+Route::put('/habitant/{id}', [HabitantController::class, 'update'])->name('pages.habitant.update');
+Route::delete('/habitant/{id}', [HabitantController::class, 'destroy'])->name('pages.habitant.destroy');
+
+
+
+Route::get('delegue', [DelegueQuartierController::class, 'index'])->name('pages.delegue.index');
+Route::get('delegue/create', [DelegueQuartierController::class, 'create'])->name('pages.delegue.create');
+Route::post('delegue', [DelegueQuartierController::class, 'store'])->name('pages.delegue.store');
+Route::get('delegue/{id}', [DelegueQuartierController::class, 'show'])->name('pages.delegue.show');
+Route::get('delegue/{id}/edit', [DelegueQuartierController::class, 'edit'])->name('pages.delegue.edit');
+Route::put('delegue/{id}', [DelegueQuartierController::class, 'update'])->name('pages.delegue.update');
+Route::delete('delegue/{id}', [DelegueQuartierController::class, 'destroy'])->name('pages.delegue.destroy');
+
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

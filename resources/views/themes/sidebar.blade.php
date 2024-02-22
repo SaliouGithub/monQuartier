@@ -11,6 +11,13 @@
       </li><!-- End Dashboard Nav -->
 
       <li class="nav-item">
+        <a class="nav-link" href="{{ route('pages.maison.index')}}">
+          <i class="bi bi-grid"></i>
+          <span>Maison</span>
+        </a>
+      </li><!-- End Maison Nav -->
+
+      <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-menu-button-wide"></i><span>Components</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
