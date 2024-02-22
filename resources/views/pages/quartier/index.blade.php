@@ -39,7 +39,7 @@
                             <tr>
                                 <th> Name </th>
                                 <th> Commune Name </th>
-                                <th class="col-4">Option</th>
+                                <th class="col-4">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -49,7 +49,7 @@
                                 <td>{{ $quartier->commune->name }}</td>
                                 <td>
                                     <button type="button" class="btn btn-outline-info" onclick="window.location.href='{{ route('pages.quartier.show', ['id' => $quartier->id]) }}'"><i class="bi bi-eye"></i> Détails</button>
-                                    <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#editQuartierModal" data-quartier-id="{{ $quartier->id }}"><i class="bi bi-pencil-square"></i> Edit</button>
+                                    <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#editQuartierModal_{{ $quartier->id }}" data-quartier-id="{{ $quartier->id }}"><i class="bi bi-pencil-square"></i> Modifier</button>
                                     <button type="button" class="btn btn-outline-danger" onclick="openDeleteModalQuartier('{{ $quartier->id }}')"><i class="bi bi-trash"></i> Supprimer</button>
                                 </td>
                                
@@ -105,7 +105,7 @@
 
 <!-- Edit quartier Modal -->
 @foreach($quartiers as $index => $quartier)
-<div class="modal fade" id="editQuartierModal" tabindex="-1" aria-hidden="true">
+<div class="modal fade" id="editQuartierModal_{{ $quartier->id }}" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -113,25 +113,22 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form class="row g-3" method="POST" action="{{ route('pages.quartier.update', $quartier->id) }}"
-                    novalidate>
+                <form class="row g-3" method="POST" action="{{ route('pages.quartier.update', $quartier->id) }}" novalidate>
                     @csrf
                     @method('PUT')
                     <div class="col-md-12">
                         <div class="form-floating">
-                            <input type="text" class="form-control" name="name" id="name"
-                                value="{{ $quartier->name }}" placeholder="Name" required autofocus>
-                            <label for="name">Name</label>
+                            <input type="text" class="form-control" name="name" id="quartier_name_{{ $quartier->id }}" value="{{ $quartier->name }}" placeholder="Name" required autofocus>
+                            <label for="quartier_name_{{ $quartier->id }}">Name</label>
                         </div>
                     </div>
                     <div class="form-floating mb-3">
-                        <select class="form-select" id="id_commune" name="id_commune" aria-label="Commune">
+                        <select class="form-select" id="id_commune_{{ $quartier->id }}" name="id_commune" aria-label="Commune">
                             @foreach($communes as $commune)
-                            <option value="{{$commune->id}}"
-                                {{ $commune->id == $quartier->id_commune ? 'selected' : '' }}>{{$commune->name}}</option>
+                            <option value="{{ $commune->id }}" {{ $commune->id == $quartier->id_commune ? 'selected' : '' }}>{{ $commune->name }}</option>
                             @endforeach
                         </select>
-                        <label for="id_commune">Commune</label>
+                        <label for="id_commune_{{ $quartier->id }}">Commune</label>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
@@ -171,15 +168,13 @@
 <!--End Modal de confirmation de suppression -->
 
 <script>
-    // Function to open the delete modal for Quartier
+
     function openDeleteModalQuartier(quartierId) {
-        // Assuming you have a modal with ID deleteQuartierModal
         deleteQuartierId = quartierId;
         $('#deleteQuartierModal').modal('show');
 
     }
 
-    // Function to confirm deletion
     function confirmDeleteQuartier() {
         var form = document.getElementById('deleteQuartierForm');
         if (form) {
@@ -189,12 +184,8 @@
             console.error('Le formulaire de suppression est introuvable.');
         }
     }
-</script>
 
-
-<script>
     document.addEventListener('DOMContentLoaded', function () {
-        var editQuartierBtns = document.querySelectorAll('.quartier-list .list-group-item .btn-outline-secondary');
         editQuartierBtns.forEach(function (btn) {
             btn.addEventListener('click', function () {
                 var quartierId = this.getAttribute('data-quartier-id');
@@ -204,12 +195,7 @@
     });
 
     function openEditModalQuartier(quartierId) {
-        var modal = new bootstrap.Modal(document.getElementById('editQuartierModal'));
-        var nameInput = document.getElementById('name');
-        var communeInput = document.getElementById('id_commune');
-        var quartier = quartiers.find(function (q) { return q.id == quartierId; });
-        nameInput.value = quartier.name;
-        communeInput.value = quartier.id_commune;
+        var modal = new bootstrap.Modal(document.getElementById('editQuartierModal_' + quartierId));
         modal.show();
     }
 </script>

@@ -38,7 +38,7 @@
                     <th class="col-8">
                       <b>N</b>ame
                     </th>
-                    <th class="col-4">Option</th>
+                    <th class="col-4">Action</th>
 
                   </tr>
                 </thead>
@@ -171,7 +171,6 @@
     }
 
     document.addEventListener('DOMContentLoaded', function() {
-        var editCommuneBtns = document.querySelectorAll('.btn-outline-secondary[data-bs-target^="#editCommuneModal"]');
         editCommuneBtns.forEach(function(btn) {
             btn.addEventListener('click', function() {
                 var communeId = this.getAttribute('data-commune-id');
