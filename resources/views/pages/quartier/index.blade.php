@@ -1,5 +1,4 @@
-@extends('pages.index')
-
+<x-pages-index>
 @section('content')
 
 @if (session('success'))
@@ -216,3 +215,4 @@
 </script>
 
 @endsection
+</x-pages-index>

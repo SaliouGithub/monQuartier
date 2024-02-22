@@ -12,6 +12,7 @@ class PagesIndex extends Component
      */
     public function render(): View
     {
-        return view('pages.dashboard');
+        return view('pages.index');
+        // return view('pages.dashboard');
     }
 }
