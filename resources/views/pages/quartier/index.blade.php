@@ -51,40 +51,49 @@
       </div>
     </section>
 
-    <!-- Add quartier Modal -->
-    <div class="modal fade" id="openModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Ajouter un quartier</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                  <div class="row mb-3">
-                    <label for="name" class="form-label">Name</label>
-                    <input type="text" name="name" :value="old('name')" class="form-control" id="name" required autofocus>
+<!-- Add quartier Modal -->
+<div class="modal fade" id="openModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Ajouter un quartier</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form class="row g-3">
+                  <div class="col-md-12">
+                      <div class="form-floating">
+                          <input type="text" class="form-control" name="name" id="name" :value="old('name')" placeholder="Name" required autofocus>
+                          <label for="name">Name</label>
+                      </div>
                   </div>
-                  <div class="row mb-3">
-                    <label for="inputState" class="form-label">State</label>
-                    <select id="inputState" class="form-select">
-                      <option selected="">Choose...</option>
-                      <option value="1">One</option>
-                      <option value="2">Two</option>
-                      <option value="3">Three</option>
-                    </select>
+                  
+                  <div class="form-floating mb-3">
+                      <select class="form-select" id="floatingSelect" aria-label="Commune">
+                          @foreach($communes as $commune)
+                            <option value="{{$commune->id}}">{{$commune->name}}</option>
+                          @endforeach
+                      </select>
+                      <label for="floatingSelect">Commune</label>
                   </div>
-                <div class="d-flex justify-content-start">
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
+              </form>
+            </div>
+            <div class="d-flex justify-content-start">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
             </div>
         </div>
     </div>
-  <!-- End Add quartier Modal -->
+</div>
+<!-- End Add quartier Modal -->
+
 
 
 @endsection
 
 
+<!-- @foreach ($communes as $commune)
+  <option value="{{$commune->id}}">{{$commune->name}}</option>
+@endforeach -->

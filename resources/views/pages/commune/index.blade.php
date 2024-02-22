@@ -73,7 +73,7 @@
                     <h5 class="modal-title">Ajouter une commune</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form class="row g-3 needs-validation" method="POST" action="{{ route('pages.commune.store') }}" novalidate>
+                <!-- <form class="row g-3 needs-validation" method="POST" action="{{ route('pages.commune.store') }}" novalidate>
                     {{ csrf_field() }}
                     <div class="modal-body">
                         <label for="name" class="form-label">Name</label>
@@ -83,7 +83,22 @@
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-primary">Valider</button>
                     </div>
-                </form>
+                </form> -->
+                <div class="modal-body">
+                  <form class="row g-3" method="POST" action="{{ route('pages.commune.store') }}" novalidate>
+                    {{ csrf_field() }}
+                    <div class="col-md-12">
+                      <div class="form-floating">
+                          <input type="text" class="form-control" name="name" id="name" :value="old('name')" placeholder="Name" required autofocus>
+                          <label for="name">Name</label>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Valider</button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
             </div>
         </div>
     </div>
