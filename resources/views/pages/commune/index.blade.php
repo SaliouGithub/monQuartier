@@ -49,7 +49,7 @@
                     <td>{{ $commune->name }}</td>
                     <td class="text-end"> 
                       <button type="button" class="btn btn-outline-info" onclick="window.location.href='{{ route('pages.commune.show', ['id' => $commune->id]) }}'"><i class="bi bi-eye"></i> Détails</button>  
-                      <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#editCommuneModal"data-commune-id="{{ $commune->id }}"><i class="bi bi-pencil-square"></i> Edit</button>
+                      <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#editCommuneModal_{{ $commune->id }}" data-commune-id="{{ $commune->id }}"><i class="bi bi-pencil-square"></i> Edit</button>
                       <button type="button" class="btn btn-outline-danger" onclick="openDeleteModal('{{ $commune->id }}')"><i class="bi bi-trash"></i> Supprimer</button>
                     </td>
                 </tr>
@@ -97,7 +97,8 @@
 
     <!-- Edit commune Modal -->
     @foreach($communes as $index => $commune)
-    <div class="modal fade" id="editCommuneModal" tabindex="-1" aria-hidden="true">
+    <!-- <div class="modal fade" id="editCommuneModal" tabindex="-1" aria-hidden="true"> -->
+    <div class="modal fade" id="editCommuneModal_{{ $commune->id }}" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -153,56 +154,40 @@
 
 
   <script>
-    // Variable pour stocker l'ID du commune à supprimer
     var deleteCommuneId;
 
-    // Fonction pour ouvrir le modal de suppression
     function openDeleteModal(communeId) {
-        // Mettre à jour l'ID du commune dans la variable et afficher le modal
         deleteCommuneId = communeId;
         $('#deleteCommuneModal').modal('show');
     }
 
-    // Fonction pour confirmer la suppression
     function confirmDelete() {
-        // Trouver le formulaire
         var form = document.getElementById('deleteCommuneForm');
-
-        // Vérifier si le formulaire a été trouvé
         if (form) {
-            // Mettre à jour l'attribut action du formulaire
             form.action = '/commune/' + deleteCommuneId;
-
-            // Soumettre le formulaire
             form.submit();
         } else {
             console.error('Le formulaire de suppression est introuvable.');
         }
     }
-  </script>
 
-
-    <script>
-
-        document.addEventListener('DOMContentLoaded', function() {
-        var editCommuneBtns = document.querySelectorAll('.commune-list .list-group-item .btn-outline-secondary');
+    document.addEventListener('DOMContentLoaded', function() {
+        var editCommuneBtns = document.querySelectorAll('.btn-outline-secondary[data-bs-target^="#editCommuneModal"]');
         editCommuneBtns.forEach(function(btn) {
-          btn.addEventListener('click', function() {
-            var communeId = this.getAttribute('data-commune-id');
-            openEditModal(communeId);
-          });
+            btn.addEventListener('click', function() {
+                var communeId = this.getAttribute('data-commune-id');
+                openEditModal(communeId);
+            });
         });
-      });
-      function openEditModal(communeId) {
-        var modal = new bootstrap.Modal(document.getElementById('editCommuneModal'));
-        var nameInput = document.getElementById('name');
-        var urlInput = document.getElementById('url');
-        var commune = communes.find(function(c) { return c.id == communeId; });
-        nameInput.value = commune.name;
-        urlInput.value = commune.url;
+    });
+
+    function openEditModal(communeId) {
+        var modal = new bootstrap.Modal(document.getElementById('editCommuneModal_' + communeId));
         modal.show();
     }
-    </script>
+    
+  </script>
+
 
 
 
