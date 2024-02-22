@@ -44,12 +44,12 @@ class CommuneController extends Controller
         $commune = Commune::find($id);
         $input = $request->all();
         $commune->update($input);
-        return redirect()->route('pages.commune.index')->with('flash_message', 'Commune modifiée avec succès!');  
+        return redirect()->route('pages.commune.index')->with(['success' => 'Commune modifiée avec succès']);  
     }
     
     public function destroy(string $id): RedirectResponse
     {
         Commune::destroy($id);
-        return redirect('commune')->with('flash_message', 'Commune supprimée avec succès!'); 
+        return redirect('commune')->with(['success' => 'Commune supprimée avec succès']); 
     }
 }

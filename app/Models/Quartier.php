@@ -12,4 +12,9 @@ class Quartier extends Model
         'name',
         'id_commune'
     ];
+
+    public function commune()
+    {
+        return $this->belongsTo(Commune::class, 'id_commune');
+    }
 }

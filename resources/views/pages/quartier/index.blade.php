@@ -1,55 +1,71 @@
 @extends('pages.index')
 
 @section('content')
- 
+
+@if (session('success'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <i class="bi bi-check-circle me-1"></i>
+        {{ session('success') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+@endif
+@if (session('error'))
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <i class="bi bi-exclamation-octagon me-1"></i>
+        {{ session('error') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+@endif
+
+<!-- Page Title -->
 <div class="pagetitle">
-      <h1>Liste des quartiers</h1>
+    <h1>Liste des quartiers</h1>
+</div>
+<!-- End Page Title -->
 
-    </div><!-- End Page Title -->
-
-    <section class="section">
-      <div class="row">
+<section class="section">
+    <div class="row">
         <div class="col-lg-12">
 
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Quartier</h5>
-              <div class="col-md-11 text-end move-up">
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#openModal"><i class="bi bi-plus-circle"></i> Ajouter</button>
-              </div>
-              <!-- Table with stripped rows -->
-              <table class="table datatable">
-                <thead>           
-                  <tr>
-                    <th>
-                      <b>N</b>ame
-                    </th>
-                    <th></th>
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Quartiers</h5>
+                    <div class="col-md-11 text-end move-up">
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                            data-bs-target="#openModal"><i class="bi bi-plus-circle"></i> Ajouter</button>
+                    </div>
+                    <!-- Table with stripped rows -->
+                    <table class="table datatable">
+                        <thead>
+                            <tr>
+                                <th> Name </th>
+                                <th> Commune Name </th>
+                                <th class="col-4">Option</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($quartiers as $quartier)
+                            <tr>
+                                <td>{{ $quartier->name }}</td>
+                                <td>{{ $quartier->commune->name }}</td>
+                                <td>
+                                    <button type="button" class="btn btn-outline-info" onclick="window.location.href='{{ route('pages.quartier.show', ['id' => $quartier->id]) }}'"><i class="bi bi-eye"></i> Détails</button>
+                                    <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#editQuartierModal" data-quartier-id="{{ $quartier->id }}"><i class="bi bi-pencil-square"></i> Edit</button>
+                                    <button type="button" class="btn btn-outline-danger" onclick="openDeleteModalQuartier('{{ $quartier->id }}')"><i class="bi bi-trash"></i> Supprimer</button>
+                                </td>
+                               
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                    <!-- End Table with stripped rows -->
 
-                  </tr>
-                </thead>
-                <tbody>
-                @foreach($quartiers as $quartier)
-                <tr>
-                    <td>{{ $quartier->name }}</td>
-                    <td> 
-                      <button type="button" class="btn btn-outline-info"><i class="bi bi-eye"></i> Détails</button>  
-                      <button type="button" class="btn btn-outline-secondary"><i class="bi bi-pencil-square"></i> Edit</button>  
-                      <button type="button" class="btn btn-outline-danger"><i class="bi bi-trash"></i> Delete</button>  
-                    </td>
-                    <!-- Ajoutez d'autres colonnes selon vos besoins -->
-                </tr>
-                @endforeach
-                </tbody>
-              </table>
-              <!-- End Table with stripped rows -->
-
+                </div>
             </div>
-          </div>
 
         </div>
-      </div>
-    </section>
+    </div>
+</section>
 
 <!-- Add quartier Modal -->
 <div class="modal fade" id="openModal" tabindex="-1" aria-hidden="true">
@@ -60,40 +76,143 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              <form class="row g-3">
-                  <div class="col-md-12">
-                      <div class="form-floating">
-                          <input type="text" class="form-control" name="name" id="name" :value="old('name')" placeholder="Name" required autofocus>
-                          <label for="name">Name</label>
-                      </div>
-                  </div>
-                  
-                  <div class="form-floating mb-3">
-                      <select class="form-select" id="floatingSelect" aria-label="Commune">
-                          @foreach($communes as $commune)
+                <form class="row g-3" method="POST" action="{{ route('pages.quartier.store') }}" novalidate>
+                    {{ csrf_field() }}
+                    <div class="col-md-12">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" name="name" id="name" :value="old('name')"
+                                placeholder="Name" required autofocus>
+                            <label for="name">Name</label>
+                        </div>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <select class="form-select" id="id_commune" name="id_commune" aria-label="Commune">
+                            @foreach($communes as $commune)
                             <option value="{{$commune->id}}">{{$commune->name}}</option>
-                          @endforeach
-                      </select>
-                      <label for="floatingSelect">Commune</label>
-                  </div>
-              </form>
-            </div>
-            <div class="d-flex justify-content-start">
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                            @endforeach
+                        </select>
+                        <label for="id_commune">Commune</label>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                        <button type="submit" class="btn btn-primary">Valider</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
 </div>
 <!-- End Add quartier Modal -->
 
+<!-- Edit quartier Modal -->
+@foreach($quartiers as $index => $quartier)
+<div class="modal fade" id="editQuartierModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Modifier un quartier</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="row g-3" method="POST" action="{{ route('pages.quartier.update', $quartier->id) }}"
+                    novalidate>
+                    @csrf
+                    @method('PUT')
+                    <div class="col-md-12">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" name="name" id="name"
+                                value="{{ $quartier->name }}" placeholder="Name" required autofocus>
+                            <label for="name">Name</label>
+                        </div>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <select class="form-select" id="id_commune" name="id_commune" aria-label="Commune">
+                            @foreach($communes as $commune)
+                            <option value="{{$commune->id}}"
+                                {{ $commune->id == $quartier->id_commune ? 'selected' : '' }}>{{$commune->name}}</option>
+                            @endforeach
+                        </select>
+                        <label for="id_commune">Commune</label>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                        <button type="submit" class="btn btn-primary">Valider</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@endforeach
+<!-- End Edit quartier Modal -->
 
+<!-- Modal de confirmation de suppression -->
+<div class="modal fade" id="deleteQuartierModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Confirmer la suppression du quartier</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Êtes-vous sûr de vouloir supprimer ce quartier?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                <button type="button" class="btn btn-danger" onclick="confirmDeleteQuartier()">Supprimer</button>
+            </div>
+        </div>
+    </div>
+</div>
+<form id="deleteQuartierForm" method="POST"  style="display: none;">
+    @csrf
+    @method('DELETE')
+    <input type="hidden" name="quartier_id" id="deleteQuartierIdInput">
+</form>
+<!--End Modal de confirmation de suppression -->
+
+<script>
+    // Function to open the delete modal for Quartier
+    function openDeleteModalQuartier(quartierId) {
+        // Assuming you have a modal with ID deleteQuartierModal
+        deleteQuartierId = quartierId;
+        $('#deleteQuartierModal').modal('show');
+
+    }
+
+    // Function to confirm deletion
+    function confirmDeleteQuartier() {
+        var form = document.getElementById('deleteQuartierForm');
+        if (form) {
+          form.action = '/quartier/' + deleteQuartierId;
+            form.submit();
+        } else {
+            console.error('Le formulaire de suppression est introuvable.');
+        }
+    }
+</script>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var editQuartierBtns = document.querySelectorAll('.quartier-list .list-group-item .btn-outline-secondary');
+        editQuartierBtns.forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                var quartierId = this.getAttribute('data-quartier-id');
+                openEditModalQuartier(quartierId);
+            });
+        });
+    });
+
+    function openEditModalQuartier(quartierId) {
+        var modal = new bootstrap.Modal(document.getElementById('editQuartierModal'));
+        var nameInput = document.getElementById('name');
+        var communeInput = document.getElementById('id_commune');
+        var quartier = quartiers.find(function (q) { return q.id == quartierId; });
+        nameInput.value = quartier.name;
+        communeInput.value = quartier.id_commune;
+        modal.show();
+    }
+</script>
 
 @endsection
-
-
-<!-- @foreach ($communes as $commune)
-  <option value="{{$commune->id}}">{{$commune->name}}</option>
-@endforeach -->
