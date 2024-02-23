@@ -37,9 +37,9 @@
                     <table class="table datatable">
                         <thead>
                             <tr>
-                                <th> Name </th>
-                                <th> Commune Name </th>
-                                <th class="col-4">Action</th>
+                                <th class="col-4"> Nom </th>
+                                <th class="col-5"> Nom de la commune</th>
+                                <th class="col-3">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -48,8 +48,8 @@
                                 <td>{{ $quartier->name }}</td>
                                 <td>{{ $quartier->commune->name }}</td>
                                 <td>
-                                    <button type="button" class="btn btn-outline-info" onclick="window.location.href='{{ route('pages.quartier.show', ['id' => $quartier->id]) }}'"><i class="bi bi-eye"></i> Détails</button>
-                                    <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#editQuartierModal_{{ $quartier->id }}" data-quartier-id="{{ $quartier->id }}"><i class="bi bi-pencil-square"></i> Modifier</button>
+                                    <!-- <button type="button" class="btn btn-outline-info" onclick="window.location.href='{{ route('pages.quartier.show', ['id' => $quartier->id]) }}'"><i class="bi bi-eye"></i> Détails</button> -->
+                                    <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#editQuartierModal_{{ $quartier->id }}" data-quartier-id="{{ $quartier->id }}"><i class="bi bi-pencil-square"></i> Modifier</button>
                                     <button type="button" class="btn btn-outline-danger" onclick="openDeleteModalQuartier('{{ $quartier->id }}')"><i class="bi bi-trash"></i> Supprimer</button>
                                 </td>
                                

@@ -47,8 +47,8 @@
                     <td>{{ $maison->surface }}  m²</td>
                     <td>{{ $maison->rue }}</td>
                     <td class="text-end"> 
-                      <button type="button" class="btn btn-outline-info" onclick="window.location.href='{{ route('pages.maison.show', ['id' => $maison->id]) }}'"><i class="bi bi-eye"></i> Détails</button>  
-                      <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#editMaisonModal_{{ $maison->id }}" data-maison-id="{{ $maison->id }}"><i class="bi bi-pencil-square"></i> Edit</button>
+                      <!-- <button type="button" class="btn btn-outline-info" onclick="window.location.href='{{ route('pages.maison.show', ['id' => $maison->id]) }}'"><i class="bi bi-eye"></i> Détails</button>   -->
+                      <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#editMaisonModal_{{ $maison->id }}" data-maison-id="{{ $maison->id }}"><i class="bi bi-pencil-square"></i> Edit</button>
                       <button type="button" class="btn btn-outline-danger" onclick="openDeleteModal('{{ $maison->id }}')"><i class="bi bi-trash"></i> Supprimer</button>
                     </td>
                 </tr>

@@ -41,7 +41,7 @@
                                 <th>Nom</th>
                                 <th>Téléphone</th>
                                 <th>Maison</th>
-                                <th class="col-4">Action</th>
+                                <th class="col-3">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -52,8 +52,8 @@
                                 <td>{{ $habitant->telephone }}</td>
                                 <td>{{ $habitant->maison->rue }}</td>
                                 <td>
-                                    <button type="button" class="btn btn-outline-info" onclick="window.location.href='{{ route('pages.habitant.show', ['id' => $habitant->id]) }}'"><i class="bi bi-eye"></i> Détails</button>
-                                    <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#editHabitantModal_{{ $habitant->id }}" data-habitant-id="{{ $habitant->id }}"><i class="bi bi-pencil-square"></i> Modifier</button>
+                                    <!-- <button type="button" class="btn btn-outline-info" onclick="window.location.href='{{ route('pages.habitant.show', ['id' => $habitant->id]) }}'"><i class="bi bi-eye"></i> Détails</button> -->
+                                    <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#editHabitantModal_{{ $habitant->id }}" data-habitant-id="{{ $habitant->id }}"><i class="bi bi-pencil-square"></i> Modifier</button>
                                     <button type="button" class="btn btn-outline-danger" onclick="openDeleteModalHabitant('{{ $habitant->id }}')"><i class="bi bi-trash"></i> Supprimer</button>
                                 </td>
                                

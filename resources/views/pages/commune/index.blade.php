@@ -35,10 +35,10 @@
               <table class="table datatable">
                 <thead>           
                   <tr>
-                    <th class="col-8">
-                      <b>N</b>ame
+                    <th class="col-9">
+                      <b>Nom
                     </th>
-                    <th class="col-4">Action</th>
+                    <th class="col-3">Action</th>
 
                   </tr>
                 </thead>
@@ -47,8 +47,8 @@
                 <tr>
                     <td>{{ $commune->name }}</td>
                     <td class="text-end"> 
-                      <button type="button" class="btn btn-outline-info" onclick="window.location.href='{{ route('pages.commune.show', ['id' => $commune->id]) }}'"><i class="bi bi-eye"></i> Détails</button>  
-                      <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#editCommuneModal_{{ $commune->id }}" data-commune-id="{{ $commune->id }}"><i class="bi bi-pencil-square"></i> Edit</button>
+                      <!-- <button type="button" class="btn btn-outline-info" onclick="window.location.href='{{ route('pages.commune.show', ['id' => $commune->id]) }}'"><i class="bi bi-eye"></i> Détails</button>   -->
+                      <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#editCommuneModal_{{ $commune->id }}" data-commune-id="{{ $commune->id }}"><i class="bi bi-pencil-square"></i> Edit</button>
                       <button type="button" class="btn btn-outline-danger" onclick="openDeleteModal('{{ $commune->id }}')"><i class="bi bi-trash"></i> Supprimer</button>
                     </td>
                 </tr>
