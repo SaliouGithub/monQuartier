@@ -40,7 +40,7 @@
                                 <th>Prénom</th>
                                 <th>Nom</th>
                                 <th>Téléphone</th>
-                                <th>Maison</th>
+                                <th>Rue de la maison</th>
                                 <th class="col-3">Action</th>
                             </tr>
                         </thead>
