@@ -8,6 +8,7 @@
   <title>Mon quartier </title>
   <meta content="" name="description">
   <meta content="" name="keywords">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
 
   <!-- Favicons -->
   <link href="../assets/img/favicon.png" rel="icon">
@@ -39,8 +40,7 @@
   ======================================================== -->
 </head>
 
-<!-- @include('themes.head'); -->
-
+<body>
   <!-- ======= Header ======= -->
   <header id="header" class="header fixed-top d-flex align-items-center">
 
@@ -69,7 +69,7 @@
         </li><!-- End Search Icon-->
 
         <li class="nav-item dropdown pe-3">
-
+        @auth
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
             <img src="../assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
             <span class="d-none d-md-block dropdown-toggle ps-2">{{ Auth::user()->name }}</span>
@@ -115,8 +115,10 @@
               </a>
               </form>
             </li>
-
           </ul><!-- End Profile Dropdown Items -->
+        @else   
+            <script>window.location.href = "{{ route('login') }}";</script>
+        @endauth
         </li><!-- End Profile Nav -->
 
       </ul>
@@ -124,75 +126,120 @@
 
   </header><!-- End Header -->
 
-    <!-- ======= Sidebar ======= -->
-    <aside id="sidebar" class="sidebar">
+  <!-- ======= Sidebar ======= -->
+  <aside id="sidebar" class="sidebar">
 
-<ul class="sidebar-nav" id="sidebar-nav">
+    <ul class="sidebar-nav" id="sidebar-nav">
 
-  <li class="nav-item">
-    <a class="nav-link" href="{{ route('dashboard')}}">
-      <i class="bi bi-grid"></i>
-      <span>Dashboard</span>
-    </a>
-  </li><!-- End Dashboard Nav -->
-
-  <li class="nav-item">
-    <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
-      <i class="bi bi-menu-button-wide"></i><span>Components</span><i class="bi bi-chevron-down ms-auto"></i>
-    </a>
-    <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-      <li>
-        <a href="{{ route('pages.commune.index')}}">
-          <i class="bi bi-circle"></i><span>Commune</span>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ route('dashboard')}}">
+          <i class="bi bi-grid"></i>
+          <span>Dashboard</span>
         </a>
-      </li>
-      <li>
-        <a href="{{ route('pages.quartier.index')}}">
-          <i class="bi bi-circle"></i><span>Quartier</span>
+      </li><!-- End Dashboard Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link" href="{{ route('pages.maison.index')}}">
+          <i class="bi bi-grid"></i>
+          <span>Maison</span>
         </a>
-      </li>
+      </li><!-- End Maison Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link" href="{{ route('pages.habitant.index')}}">
+          <i class="bi bi-grid"></i>
+          <span>Habitant</span>
+        </a>
+      </li><!-- End Habitant Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link" href="{{ route('pages.delegue.index')}}">
+          <i class="bi bi-grid"></i>
+          <span>Délégué</span>
+        </a>
+      </li><!-- End Habitant Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-menu-button-wide"></i><span>Components</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="{{ route('pages.commune.index')}}">
+              <i class="bi bi-circle"></i><span>Commune</span>
+            </a>
+          </li>
+          <li>
+            <a href="{{ route('pages.quartier.index')}}">
+              <i class="bi bi-circle"></i><span>Quartier</span>
+            </a>
+          </li>
+        </ul>
+      </li><!-- End Components Nav -->
+
+      <li class="nav-heading">Administration</li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="{{ route('pages.utilisateur.index')}}">
+          <i class="bi bi-people"></i>
+          <span>Utilisateurs</span>
+        </a>
+      </li><!-- End Dashboard Nav -->
+
+
+
     </ul>
-  </li><!-- End Components Nav -->
 
-  <li class="nav-heading">Administration</li>
+  </aside><!-- End Sidebar-->
 
-  <li class="nav-item">
-    <a class="nav-link" href="{{ route('pages.user.index')}}">
-      <i class="bi bi-people"></i>
-      <span>Utilisateurs</span>
-    </a>
-  </li><!-- End Dashboard Nav -->
+  <main id="main" class="main">
 
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Créer utilisateur</h5>
 
-
-</ul>
-
-</aside><!-- End Sidebar-->
-
-<main id="main" class="main">
-<div class="pagetitle">
-    <h1>Détails commune</h1>
-</div>
-
-<section class="section">
-    <div class="row">
-        <div class="col-lg-10">
-            <div class="card">
-                <div class="card-body">
-                    <div class="row mb-3">
-                    <label class="col-sm-2 col-form-label">Name</label>
-                    <!-- <div class="col-sm-10"> -->
-                        <input type="text" class="form-control" value="{{ $communes->name }}" disabled="">
-                    <!-- </div> -->
+                <!-- Floating Labels Form -->
+                <form class="row g-3">
+                <div class="col-md-10">
+                    <div class="form-floating">
+                    <input type="text" class="form-control" id="name" placeholder="Nom complet">
+                    <label for="name">Nom complet</label>
                     </div>
                 </div>
+                <div class="col-md-10">
+                    <div class="form-floating">
+                    <input type="email" class="form-control" id="email" placeholder="Email">
+                    <label for="email">Email</label>
+                    </div>
+                </div>
+                <div class="col-md-10">
+                    <div class="form-floating">
+                    <input type="password" class="form-control" id="password" placeholder="Mot de passe">
+                    <label for="password">Mot de passe</label>
+                    </div>
+                </div>
+                <div class="col-md-10"  style="display: none;">
+                    <div class="form-floating">
+                    <input type="email" class="form-control" id="email" placeholder="Email">
+                    <label for="email">Email</label>
+                    </div>
+                </div>
+                <div class="col-md-10"  style="display: none;">
+                    <div class="form-floating">
+                    <input type="email" class="form-control" id="email" placeholder="Email">
+                    <label for="email">Email</label>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <button type="reset" class="btn btn-secondary" onclick="window.location.href='{{ route('pages.utilisateur.index')}}'">Annuler</button>
+                    <button type="submit" class="btn btn-primary">Créer</button>
+                </div>
+                </form><!-- End floating Labels Form -->
+
             </div>
         </div>
-    </div>
-</section>
 
-
-</main><!-- End #main -->
+  </main><!-- End #main -->
 
 <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
@@ -208,7 +255,6 @@
 
 <!-- Template Main JS File -->
 <script src="../assets/js/main.js"></script>
-
 
 </body>
 

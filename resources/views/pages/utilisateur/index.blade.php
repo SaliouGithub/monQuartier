@@ -2,9 +2,8 @@
 
 @section('content')
  
-<div class="pagetitle">
+    <div class="pagetitle">
       <h1>Liste des utilisateurs</h1>
-
     </div><!-- End Page Title -->
 
     <section class="section">
@@ -15,19 +14,17 @@
             <div class="card-body">
               <h5 class="card-title">Utilisateurs</h5>
               <div class="col-md-11 text-end move-up">
-                <!-- <button type="button" class="btn btn-primary"  onclick="window.location.href='{{ url('/utilisateur/create') }}'"><i class="bi bi-plus-circle"></i> Ajouter</button> -->
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUserModal"><i class="bi bi-plus-circle"></i> Ajouter</button>
+                <button type="button" class="btn btn-primary"  onclick="window.location.href='{{ url('/utilisateur/create') }}'"><i class="bi bi-plus-circle"></i> Ajouter</button>
+                <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUserModal"><i class="bi bi-plus-circle"></i> Ajouter</button> -->
               </div>
               <!-- Table with stripped rows -->
               <table class="table datatable">
                 <thead>           
                   <tr>
-                    <th>
-                      <b>N</b>ame
-                    </th>
+                    <th>Nom complet</th>
                     <th>Email</th>
                     <th>Status</th>
-                    <th></th>
+                    <th>Action</th>
 
                   </tr>
                 </thead>
@@ -55,26 +52,5 @@
         </div>
       </div>
     </section>
-
-    <!-- Add User Modal -->
-  <div class="modal fade" id="addUserModal" tabindex="-1" aria-hidden="true">
-      <div class="modal-dialog">
-          <div class="modal-content">
-              <div class="modal-header">
-                  <h5 class="modal-title">Ajouter un utilisateur</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-                <label for="email" class="form-label">Name</label>
-                <input type="text" name="name" :value="old('name')" class="form-control" id="name" required autofocus>
-              </div>
-              <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-primary">Save changes</button>
-              </div>
-          </div>
-      </div>
-  </div>
-<!-- End Add User Modal -->
 @endsection
 

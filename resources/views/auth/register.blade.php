@@ -60,48 +60,48 @@
                 <div class="card-body">
 
                   <div class="pt-4 pb-2">
-                    <h5 class="card-title text-center pb-0 fs-4">Create an Account</h5>
-                    <p class="text-center small">Enter your personal details to create account</p>
+                    <h5 class="card-title text-center pb-0 fs-4">Créer un compte</h5>
+                    <p class="text-center small">Entrez vos informations personnelles pour créer un compte</p>
                   </div>
 
                   <form class="row g-3 needs-validation" method="POST" action="{{ route('register') }}" novalidate>
                   @csrf
                     <div class="col-12">
-                      <label for="name" :value="__('name')" class="form-label">Name</label>
+                      <label for="name" :value="__('name')" class="form-label">Nom complet</label>
                       <input type="text" name="name" class="form-control" id="name" :value="old('name')" required autofocus autocomplete="name">
-                      <div class="invalid-feedback">Please, enter your name!</div>
+                      <div class="invalid-feedback">S'il vous plaît, entrez votre nom complet !</div>
                     </div>
 
                     <div class="col-12">
                       <label for="email" class="form-label">Email</label>
                       <input type="email" name="email" class="form-control" id="email" :value="old('email')" required autocomplete="username">
-                      <div class="invalid-feedback">Please enter a valid Email adddress!</div>
+                      <div class="invalid-feedback">S'il vous plaît entrer une adresse e-mail valide !</div>
                     </div>
 
                     <div class="col-12">
-                      <label for="password" class="form-label">Password</label>
+                      <label for="password" class="form-label">Mot de passe</label>
                       <input type="password" name="password" class="form-control" id="password" required autocomplete="new-password">
-                      <div class="invalid-feedback">Please enter your password!</div>
+                      <div class="invalid-feedback">S'il vous plaît entrez votre mot de passe !</div>
                     </div>
 
                     <div class="col-12">
-                      <label for="password_confirmation" class="form-label">Confirm Password</label>
+                      <label for="password_confirmation" class="form-label">Confirmer mot de passe</label>
                       <input class="form-control" id="password_confirmation" type="password"  name="password_confirmation" required autocomplete="new-password" >  
-                      <div class="invalid-feedback">Please enter your password!</div>
+                      <div class="invalid-feedback">'’il vous plaît entrez votre mot de passe !</div>
                     </div>
 
                     <div class="col-12">
                       <div class="form-check">
                         <input class="form-check-input" name="terms" type="checkbox" value="" id="acceptTerms" required>
-                        <label class="form-check-label" for="acceptTerms">I agree and accept the <a href="#">terms and conditions</a></label>
-                        <div class="invalid-feedback">You must agree before submitting.</div>
+                        <label class="form-check-label" for="acceptTerms"> J'accepte les <a href="#"> termes et conditions</a></label>
+                        <div class="invalid-feedback">Vous devez être d'accord avant de soumettre.</div>
                       </div>
                     </div>
                     <div class="col-12">
-                      <button class="btn btn-primary w-100" type="submit">Create Account</button>
+                      <button class="btn btn-primary w-100" type="submit">Créer compte</button>
                     </div>
                     <div class="col-12">
-                      <p class="small mb-0">Already have an account? <a href="{{ route('login') }}">Log in</a></p>
+                      <p class="small mb-0">Vous avez déjà un compte? <a href="{{ route('login') }}">Se connecter</a></p>
                     </div>
                   </form>
 
@@ -113,7 +113,7 @@
                 <!-- You can delete the links only if you purchased the pro version. -->
                 <!-- Licensing information: https://bootstrapmade.com/license/ -->
                 <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
-                Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+                <!-- Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a> -->
               </div>
 
             </div>

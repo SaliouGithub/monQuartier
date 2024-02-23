@@ -25,19 +25,14 @@ Route::get('/', function () {
 });
 
 
-// Route::resource("/utilisateur", UserController::class);
-Route::resource("/utilisateur", UserController::class, [
-    'names' => [
-        'index' => 'pages.user.index',
-        'create' => 'pages.user.create',
-        'store' => 'pages.user.store',
-        'show' => 'pages.user.show',
-        'edit' => 'pages.user.edit',
-        'update' => 'pages.user.update',
-        'destroy' => 'pages.user.destroy',
-    ],
-]);
 
+Route::get('/utilisateur', [UserController::class, 'index'])->name('pages.utilisateur.index');
+Route::get('/utilisateur/create', [UserController::class, 'create'])->name('pages.utilisateur.create');
+Route::post('/utilisateur', [UserController::class, 'store'])->name('pages.utilisateur.store');
+Route::get('/utilisateur/{id}', [UserController::class, 'show'])->name('pages.utilisateur.show');
+Route::get('/utilisateur/{id}/edit', [UserController::class, 'edit'])->name('pages.utilisateur.edit');
+Route::put('/utilisateur/{id}', [UserController::class, 'update'])->name('pages.utilisateur.update');
+Route::delete('/utilisateur/{id}', [UserController::class, 'destroy'])->name('pages.utilisateur.destroy');
 
 
 Route::get('/commune', [CommuneController::class, 'index'])->name('pages.commune.index');

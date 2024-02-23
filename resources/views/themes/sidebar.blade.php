@@ -12,21 +12,21 @@
 
       <li class="nav-item">
         <a class="nav-link" href="{{ route('pages.maison.index')}}">
-          <i class="bi bi-grid"></i>
+          <i class="bi bi-house"></i>
           <span>Maison</span>
         </a>
       </li><!-- End Maison Nav -->
 
       <li class="nav-item">
         <a class="nav-link" href="{{ route('pages.habitant.index')}}">
-          <i class="bi bi-grid"></i>
+          <i class="bi bi-person-square"></i>
           <span>Habitant</span>
         </a>
       </li><!-- End Habitant Nav -->
 
       <li class="nav-item">
         <a class="nav-link" href="{{ route('pages.delegue.index')}}">
-          <i class="bi bi-grid"></i>
+          <i class="bi bi-chat-dots"></i>
           <span>Délégué</span>
         </a>
       </li><!-- End Habitant Nav -->
@@ -38,12 +38,12 @@
         <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
             <a href="{{ route('pages.commune.index')}}">
-              <i class="bi bi-circle"></i><span>Commune</span>
+              <i class="bi bi-app-indicator"></i><span>Commune</span>
             </a>
           </li>
           <li>
             <a href="{{ route('pages.quartier.index')}}">
-              <i class="bi bi-circle"></i><span>Quartier</span>
+              <i class="bi bi-app-indicator"></i><span>Quartier</span>
             </a>
           </li>
         </ul>
@@ -52,7 +52,7 @@
       <li class="nav-heading">Administration</li>
 
       <li class="nav-item">
-        <a class="nav-link" href="{{ route('pages.user.index')}}">
+        <a class="nav-link" href="{{ route('pages.utilisateur.index')}}">
           <i class="bi bi-people"></i>
           <span>Utilisateurs</span>
         </a>
