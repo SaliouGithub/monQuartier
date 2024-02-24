@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -21,10 +22,20 @@ class UserController extends Controller
         return view('pages.utilisateur.create');
     }
   
-
+ 
     public function store(Request $request): RedirectResponse
     {
-        $input = $request->all();
+        $request->validate([
+            'name' => 'required|string',
+            'email' => 'required|email',
+            'password' => 'required|string|min:8',
+        ]);
+    
+        $input = [
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'password' => Hash::make($request->input('password')),
+        ];
         User::create($input);
         return redirect()->route('pages.utilisateur.index')->with(['success' => 'Utilisateur ajouté avec succès']);
     }

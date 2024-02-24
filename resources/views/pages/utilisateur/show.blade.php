@@ -126,7 +126,7 @@
 
   </header><!-- End Header -->
 
-  <!-- ======= Sidebar ======= -->
+   <!-- ======= Sidebar ======= -->
   <aside id="sidebar" class="sidebar">
 
     <ul class="sidebar-nav" id="sidebar-nav">
@@ -196,32 +196,30 @@
 
         <div class="card col-md-8 mx-auto">
             <div class="card-body">
-                <h5 class="card-title">Créer utilisateur</h5>
+                <h5 class="card-title">Détails utilisateur</h5>
 
                 <!-- Floating Labels Form -->
-                <form method="POST" action="{{ route('pages.utilisateur.store') }}" class="row g-3">
-                  @csrf
-                  <div class="col-md-10 mx-auto">
-                      <div class="form-floating">
-                      <input type="text" class="form-control" id="name" placeholder="Nom complet">
-                      <label for="name">Nom complet</label>
-                      </div>
+                <form class="row g-3">
+                  <div class="col-md-6 mx-auto">
+                    <label for="name" class="form-label">Nom complet</label>
+                    <input type="text" class="form-control" id="name" value="{{ $users->name }}" disabled>
                   </div>
-                  <div class="col-md-10 mx-auto">
-                      <div class="form-floating">
-                      <input type="email" class="form-control" id="email" placeholder="Email">
-                      <label for="email">Email</label>
-                      </div>
+                  <div class="col-md-6 mx-auto">
+                    <label for="email" class="form-label">Adresse email</label>
+                    <input type="text" class="form-control" id="email" value="{{ $users->email }}" disabled>
                   </div>
-                  <div class="col-md-10 mx-auto">
-                      <div class="form-floating">
-                      <input type="password" class="form-control" id="password" placeholder="Mot de passe">
-                      <label for="password">Mot de passe</label>
-                      </div>
+                  <div class="col-md-6 mx-auto">
+                    <label for="email" class="form-label">Créé le</label>
+                    <input type="text" class="form-control" id="email" value="{{ $users->created_at }}" disabled>
                   </div>
+                  <div class="col-md-6 mx-auto">
+                    <label for="email" class="form-label">Modifié le</label>
+                    <input type="text" class="form-control" id="email" value="{{ $users->updated_at }}" disabled>
+                  </div>
+
                   <div class="text-center">
-                      <button type="reset" class="btn btn-secondary" onclick="window.location.href='{{ route('pages.utilisateur.index')}}'">Annuler</button>
-                      <button type="submit" class="btn btn-primary">Créer</button>
+                      <button type="reset" class="btn btn-secondary" onclick="window.location.href='{{ route('pages.utilisateur.index')}}'">Retour</button>
+                      <button type="submit" class="btn btn-primary">Modifier</button>
                   </div>
                 </form><!-- End floating Labels Form -->
 

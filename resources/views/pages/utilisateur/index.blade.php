@@ -35,7 +35,7 @@
                     <td>{{ $user->email }}</td>
                     <td class="green"><span class="badge bg-success">Approved</span></td>
                     <td> 
-                      <button type="button" class="btn btn-outline-info"><i class="bi bi-eye"></i> Détails</button>  
+                      <button type="button" class="btn btn-outline-info" onclick="window.location.href='{{ route('pages.utilisateur.show', ['id' => $user->id]) }}'"><i class="bi bi-eye"></i> Détails</button>  
                       <button type="button" class="btn btn-outline-secondary"><i class="bi bi-pencil-square"></i> Edit</button>  
                       <button type="button" class="btn btn-outline-danger"><i class="bi bi-trash"></i> Delete</button>    
                     </td>
