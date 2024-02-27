@@ -48,7 +48,7 @@
           </li>
         </ul>
       </li><!-- End Components Nav -->
-
+      @if(auth()->user()->admin == 1)
       <li class="nav-heading">Administration</li>
 
       <li class="nav-item">
@@ -57,6 +57,7 @@
           <span>Utilisateurs</span>
         </a>
       </li><!-- End Dashboard Nav -->
+      @endif
 
 
 

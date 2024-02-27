@@ -23,7 +23,7 @@
                   <tr>
                     <th>Nom complet</th>
                     <th>Email</th>
-                    <th>Status</th>
+                    <th>Est admin</th>
                     <th>Action</th>
 
                   </tr>
@@ -33,7 +33,11 @@
                 <tr>
                     <td>{{ $user->name }}</td>
                     <td>{{ $user->email }}</td>
-                    <td class="green"><span class="badge bg-success">Actif</span></td>
+                    <td class="{{ $user->admin == 1 ? 'green' : 'red' }}">
+                        <span class="badge {{ $user->admin == 1 ? 'bg-success' : 'bg-danger' }}">
+                            {{ $user->admin == 1 ? 'OUI' : 'NON' }}
+                        </span>
+                    </td>                    
                     <td  class="text-end"> 
                       <button type="button" class="btn btn-outline-info" onclick="window.location.href='{{ route('pages.utilisateur.show', ['id' => $user->id]) }}'"><i class="bi bi-eye"></i> Détails</button>  
                       <button type="button" class="btn btn-outline-success"><i class="bi bi-pencil-square"></i> Edit</button>  

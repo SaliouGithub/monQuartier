@@ -25,7 +25,7 @@ Route::get('/', function () {
 });
 
 
-
+Route::middleware('admin')->group(function () {
 Route::get('/utilisateur', [UserController::class, 'index'])->name('pages.utilisateur.index');
 Route::get('/utilisateur/create', [UserController::class, 'create'])->name('pages.utilisateur.create');
 Route::post('/utilisateur', [UserController::class, 'store'])->name('pages.utilisateur.store');
@@ -33,7 +33,7 @@ Route::get('/utilisateur/{id}', [UserController::class, 'show'])->name('pages.ut
 Route::get('/utilisateur/{id}/edit', [UserController::class, 'edit'])->name('pages.utilisateur.edit');
 Route::put('/utilisateur/{id}', [UserController::class, 'update'])->name('pages.utilisateur.update');
 Route::delete('/utilisateur/{id}', [UserController::class, 'destroy'])->name('pages.utilisateur.destroy');
-
+});
 
 Route::get('/commune', [CommuneController::class, 'index'])->name('pages.commune.index');
 Route::get('/commune/create', [CommuneController::class, 'create'])->name('pages.commune.create');
