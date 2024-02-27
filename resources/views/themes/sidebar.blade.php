@@ -4,7 +4,7 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link" href="{{ route('dashboard')}}">
+        <a class="nav-link " href="{{ route('dashboard')}}">
           <i class="bi bi-grid"></i>
           <span>Dashboard</span>
         </a>
@@ -33,7 +33,7 @@
 
       <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-menu-button-wide"></i><span>Components</span><i class="bi bi-chevron-down ms-auto"></i>
+          <i class="bi bi-menu-button-wide"></i><span>Configuration</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
@@ -65,14 +65,16 @@
   </aside><!-- End Sidebar-->
 
   <script>
-(function ($) {
-  $(document).ready(function () {
-      $('.sidebar-nav .nav-link').click(function (event) {
-        // event.preventDefault();
-        $('.sidebar-nav .nav-link').removeClass('active');
-        $(this).addClass('active');
-      });
-    });
-})(jQuery);
+  (function ($) {
+    $(document).ready(function () {
+      // $(' .nav-link').click(function (event) {
+      //   // event.preventDefault(); // Prevent the default behavior if needed
+      //   $(' .nav-link').removeClass('active desactive');
+      //   $(this).addClass('active');
+      // });
 
+      // Add 'desactive' class to links that are not active initially
+      $(' .nav-link:not(.active)').addClass('desactive');
+    });
+  })(jQuery);
 </script>

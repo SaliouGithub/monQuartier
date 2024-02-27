@@ -691,9 +691,19 @@ h6 {
   border-radius: 4px;
 }
 
-.sidebar-nav .nav-link.active {
+/* .sidebar-nav .nav-link.desactive {
   color: #012970;
   background: #fff;
+} */
+
+/* .sidebar-nav .nav-link.active {
+  color: #fff;
+  background: #012970;
+} */
+
+.sidebar-nav .nav-link.desactive {
+  color: #012970;  
+  background: #fff; 
 }
 
 .sidebar-nav .nav-link i {

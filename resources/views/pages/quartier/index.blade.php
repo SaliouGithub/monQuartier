@@ -80,8 +80,8 @@
                     <div class="col-md-12">
                         <div class="form-floating">
                             <input type="text" class="form-control" name="name" id="name" :value="old('name')"
-                                placeholder="Name" required autofocus>
-                            <label for="name">Name</label>
+                                placeholder="Nom" required autofocus>
+                            <label for="name">Nom</label>
                         </div>
                     </div>
                     <div class="form-floating mb-3">

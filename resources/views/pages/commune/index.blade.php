@@ -77,8 +77,8 @@
                     {{ csrf_field() }}
                     <div class="col-md-12">
                       <div class="form-floating">
-                          <input type="text" class="form-control" name="name" id="name" :value="old('name')" placeholder="Name" required autofocus>
-                          <label for="name">Name</label>
+                          <input type="text" class="form-control" name="name" id="name" :value="old('name')" placeholder="Nom" required autofocus>
+                          <label for="name">Nom</label>
                       </div>
                       <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
@@ -110,8 +110,8 @@
                         @method('PUT')
                         <div class="col-md-12">
                             <div class="form-floating">
-                                <input type="text" class="form-control" name="name" id="name" value="{{ $commune->name }}" placeholder="Name" required autofocus>
-                                <label for="name">Name</label>
+                                <input type="text" class="form-control" name="name" id="name" value="{{ $commune->name }}" placeholder="Nom" required autofocus>
+                                <label for="name">Nom</label>
                             </div>
                         </div>
                         <div class="modal-footer">
